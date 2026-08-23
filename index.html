@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CIGUARD INC</title>
+
+<!-- Fuentes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Tailwind (CDN) -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Estilos de marca CIGUARD -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="font-['Inter']">
+
+<nav id="nav">
+  <div class="flex items-center gap-2.5">
+    <img src="assets/ciguard-logo.png" alt="CIGUARD" class="h-[34px] w-auto block">
+  </div>
+  <div class="nav-links flex gap-9 text-[13px] tracking-wide">
+    <a href="#productos">Productos</a>
+    <a href="#mision">Misión</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-mark">
+    <img src="assets/ciguard-logo.png" alt="CIGUARD" style="width:min(380px,70vw);height:auto;">
+  </div>
+  <p>Empresa dominicana bajo la cual desarrollamos productos digitales e impulsados por inteligencia artificial, con identidad propia en cada uno.</p>
+  <div class="status">Pendiente de registro — ONAPI</div>
+  <a class="cta" href="#productos">
+    Ver productos
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="19" x2="19" y2="5"/><polyline points="9 5 19 5 19 15"/></svg>
+  </a>
+</section>
+
+<div class="ornament">
+  <svg viewBox="0 0 520 34"><path id="ornament-path" d="M0 17 Q130 -5 260 17 Q390 39 520 17" fill="none" stroke="#B8934A" stroke-width="1"/></svg>
+</div>
+
+<section id="productos" class="reveal py-[110px] px-[6vw]">
+  <div class="section-head">
+    <div class="eyebrow">Portafolio</div>
+    <h2 class="text-[clamp(30px,4vw,44px)]">Lo que construimos</h2>
+    <p>Cada producto conserva su propia identidad visual, bajo la marca CIGUARD.</p>
+  </div>
+  <div class="products reveal-stagger">
+    <a class="product-card chess" href="https://ozama-chess.onrender.com/" target="_blank" rel="noopener">
+      <div class="product-accent"></div>
+      <span class="product-tag">En producción</span>
+      <h3>Ozama Chess</h3>
+      <p>Plataforma de ajedrez multijugador en tiempo real para la comunidad dominicana.</p>
+    </a>
+    <a class="product-card multilinks" href="https://multilinksrd.vercel.app/" target="_blank" rel="noopener">
+      <div class="product-accent"></div>
+      <div class="product-accent b"></div>
+      <span class="product-tag">En producción</span>
+      <h3>MultiLinks</h3>
+      <p>Tu perfil, todos tus enlaces, en un solo lugar.</p>
+    </a>
+  </div>
+</section>
+
+<section class="mission reveal py-[110px] px-[6vw]" id="mision">
+  <div class="section-head">
+    <div class="eyebrow">CIGUARD INC</div>
+    <h2 class="text-[clamp(30px,4vw,44px)]">Misión &amp; visión</h2>
+  </div>
+  <div class="mission-grid">
+    <div>
+      <h3>Misión</h3>
+      <p>Desarrollar productos digitales de calidad, desde plataformas de entretenimiento hasta herramientas prácticas, bajo una sola marca sólida y coherente, con identidad dominicana en su base.</p>
+    </div>
+    <div>
+      <h3>Visión</h3>
+      <p>Consolidarnos como una empresa de tecnología registrada formalmente, con un portafolio de productos propios en crecimiento, camino a convertirnos en una startup completa.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-mark">
+    <img src="assets/ciguard-logo.png" alt="CIGUARD" class="h-8 w-auto opacity-80">
+  </div>
+  <p>CIGUARD INC — Santo Domingo, República Dominicana</p>
+  <p class="legal-note">Nombre comercial en proceso de registro</p>
+</footer>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
