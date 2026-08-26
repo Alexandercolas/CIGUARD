@@ -109,11 +109,12 @@ nav.scrolled{
 }
 .product-card:hover{transform:translateY(-4px);}
 .product-card.chess{
-  background:linear-gradient(180deg,#2b2622 0%, #1C1C1A 100%);
+  background:#1C1C1A;
   color:var(--bone);
 }
 .product-card.multilinks{
-  background:linear-gradient(180deg,#1A1D21 0%, #0F1115 100%);
+  background:#0F1115;
+  border-top:3px solid #7D5CFF;
   color:#E6E6E6;
 }
 .product-tag{
@@ -123,24 +124,9 @@ nav.scrolled{
   border:1px solid rgba(239,233,220,0.25);
   color:rgba(239,233,220,0.75);
 }
+.multilinks .product-tag{border-color:rgba(198,255,61,0.35);color:#C6FF3D;}
 .product-card h3{font-size:30px;margin-bottom:10px;color:var(--bone);}
 .product-card p{font-size:14px;color:rgba(239,233,220,0.65);max-width:340px;}
-.product-accent{
-  position:absolute;bottom:-60px;right:-60px;
-  width:220px;height:220px;border-radius:50%;
-  opacity:0.35;
-}
-.chess .product-accent{background:radial-gradient(circle,#8a6a3f 0%, transparent 70%);}
-.multilinks .product-accent{background:radial-gradient(circle,#7D5CFF 0%, transparent 70%);animation:drift-a 9s ease-in-out infinite;}
-.multilinks .product-accent.b{background:radial-gradient(circle,#C6FF3D 0%, transparent 70%);left:-40px;right:auto;top:-40px;bottom:auto;animation:drift-b 11s ease-in-out infinite;}
-@keyframes drift-a{
-  0%,100%{transform:translate(0,0) scale(1);opacity:0.35;}
-  50%{transform:translate(-14px,10px) scale(1.12);opacity:0.45;}
-}
-@keyframes drift-b{
-  0%,100%{transform:translate(0,0) scale(1);opacity:0.3;}
-  50%{transform:translate(12px,-10px) scale(1.1);opacity:0.4;}
-}
 
 /* ---------- mission ---------- */
 .mission{background:var(--near-black);color:var(--bone);}
@@ -167,7 +153,6 @@ a:focus-visible, .product-card:focus-visible{outline:2px solid var(--bronze);out
 @media (prefers-reduced-motion: reduce){
   .hero-mark,.hero p,.hero .status,.hero .cta{animation:none;opacity:1;}
   .product-card{transition:none;}
-  .multilinks .product-accent,.multilinks .product-accent.b{animation:none;}
   #ornament-path{animation:none;stroke-dashoffset:0;}
   .reveal,.reveal-stagger .product-card{opacity:1;transform:none;transition:none;}
 }
