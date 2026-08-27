@@ -72,11 +72,12 @@ nav.scrolled{
 @keyframes rise{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 
 /* ---------- scroll reveal ---------- */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease;}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(0.16,1,0.3,1), transform .7s cubic-bezier(0.16,1,0.3,1);}
 .reveal.in-view{opacity:1;transform:translateY(0);}
 .reveal-stagger.in-view .product-card:nth-child(1){transition-delay:0s;}
-.reveal-stagger.in-view .product-card:nth-child(2){transition-delay:.12s;}
-.reveal-stagger .product-card{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease, transform .35s ease;}
+.reveal-stagger.in-view .product-card:nth-child(2){transition-delay:.1s;}
+.reveal-stagger.in-view .product-card:nth-child(3){transition-delay:.2s;}
+.reveal-stagger .product-card{opacity:0;transform:translateY(24px);transition:opacity .6s cubic-bezier(0.16,1,0.3,1), transform .6s cubic-bezier(0.16,1,0.3,1), box-shadow .35s ease;}
 .reveal-stagger.in-view .product-card{opacity:1;transform:translateY(0);}
 
 /* ---------- ornament divider (rejería colonial, trazo fino) ---------- */
@@ -97,16 +98,19 @@ nav.scrolled{
 .products{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;}
 .product-card{
   border-radius:4px;
-  padding:44px 36px;
+  padding:32px 28px;
   position:relative;
   overflow:hidden;
-  min-height:340px;
+  min-height:260px;
   display:flex;flex-direction:column;justify-content:flex-end;
-  transition:transform .35s ease;
+  transition:transform .35s ease, box-shadow .35s ease;
   text-decoration:none;
   cursor:pointer;
 }
 .product-card:hover{transform:translateY(-4px);}
+.product-card.chess:hover{box-shadow:0 14px 40px -10px rgba(184,147,74,0.5);}
+.product-card.multilinks:hover{box-shadow:0 14px 40px -10px rgba(125,92,255,0.5);}
+.product-card.teclazord:hover{box-shadow:0 14px 40px -10px rgba(45,212,191,0.5);}
 .product-card.chess{
   background:#1C1C1A;
   color:var(--bone);
@@ -117,7 +121,7 @@ nav.scrolled{
   color:#E6E6E6;
 }
 .product-tag{
-  position:absolute;top:32px;left:36px;
+  position:absolute;top:24px;left:28px;
   font-size:11px;letter-spacing:0.1em;text-transform:uppercase;
   padding:5px 12px;border-radius:100px;
   border:1px solid rgba(239,233,220,0.25);
@@ -129,7 +133,7 @@ nav.scrolled{
   border-top:3px solid #2DD4BF;
 }
 .teclazord .product-tag{border-color:rgba(45,212,191,0.35);color:#2DD4BF;}
-.product-card h3{font-size:30px;margin-bottom:10px;color:var(--bone);}
+.product-card h3{font-size:25px;margin-bottom:8px;color:var(--bone);}
 .product-card p{font-size:14px;color:rgba(239,233,220,0.65);max-width:340px;}
 
 /* ---------- mission ---------- */
