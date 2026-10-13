@@ -1,38 +1,23 @@
-# CIGUARD INC
+# CIGUARD — sitio institucional
 
-*Nombre provisional hasta su registro legal ante ONAPI.*
+Sitio estático en HTML, CSS y JavaScript, sin dependencias de producción ni compilación. Incluye búsqueda, filtros, fichas de productos, navegación móvil, preguntas frecuentes y páginas de privacidad y términos.
 
-CIGUARD es la empresa paraguas bajo la cual se desarrollan y agrupan los productos digitales e impulsados por IA creados desde República Dominicana.
+## Identidad y recursos
 
-## Misión
+Conserva Fraunces/Inter y la paleta oficial: `#3A3A37`, `#6C6B64`, `#EFE9DC`, `#1C1C1A`, `#B8934A`. El logo, todos los favicons y `downloads/TECLAZO_RD_Setup_v1.0.0.exe` se mantienen sin modificaciones del repositorio original.
 
-Desarrollar productos digitales de calidad —desde plataformas de entretenimiento hasta herramientas prácticas— bajo una sola marca sólida y coherente, con identidad dominicana en su base.
+## Portafolio
 
-## Visión
+Se mantienen Ozama Chess, MultiLinks, Teclazo RD, Núcleo CRM y RAVIA14, sus enlaces y estados originales. Las fichas se gestionan en `products` de `js/main.js`. Los estados no verifican la disponibilidad de los servicios externos.
 
-Consolidar CIGUARD como una empresa de tecnología registrada formalmente, con un portafolio de productos propios en crecimiento, camino a convertirse en una startup completa.
+## Ejecución y despliegue
 
-## Identidad de marca
+Servir la raíz con un servidor HTTP, por ejemplo `python -m http.server 8000`, y abrir `http://localhost:8000`. Se puede desplegar la raíz en Vercel como sitio estático. `vercel.json` configura cabeceras básicas. El dominio de los metadatos, robots y sitemap es `https://ciguard.vercel.app/`.
 
-- **Logo:** ave en perfil (inspirada en la cigua palmera, ave nacional dominicana) integrada en la letra "C" de CIGUARD.
-- **Paleta:**
+## Contacto
 
-| Rol | Color | Hex |
-|---|---|---|
-| Primario | Gris carbón | `#3A3A37` |
-| Secundario | Gris piedra | `#6C6B64` |
-| Fondo claro | Hueso | `#EFE9DC` |
-| Fondo oscuro | Casi-negro azulado | `#1C1C1A` |
-| Acento | Bronce colonial | `#B8934A` |
+`CONTACT_EMAIL` en `js/main.js` permanece vacío porque no se ha proporcionado una dirección receptora. El formulario informa que el canal está pendiente y no envía ni almacena mensajes. Una vez configurado, prepara un enlace `mailto:`; la entrega depende de la aplicación de correo del visitante. No hay backend ni recepción automática.
 
-## Portafolio de productos
+## Situación legal
 
-| Producto | Descripción | Estado |
-|---|---|---|
-| **Ozama Chess** | Plataforma de ajedrez multijugador en tiempo real, dirigida a la comunidad dominicana | Desplegado, en producción |
-| **MultiLinks** | Herramienta tipo "link in bio" | Desplegado, en producción |
-
-## Legal
-
-- [ ] Registro de nombre comercial/marca ante ONAPI
-- [ ] Constitución formal de la empresa (SRL/EIRL) ante la Cámara de Comercio
+La documentación original indica que el registro ante ONAPI y la constitución formal siguen pendientes. Los textos de privacidad y términos son informativos iniciales y requieren revisión antes de operar servicios comerciales.

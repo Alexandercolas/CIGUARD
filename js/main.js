@@ -1,17 +1,22 @@
-// CIGUARD — interacciones del sitio
-
-// Nav translúcido al hacer scroll
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 40) nav.classList.add('scrolled');
-  else nav.classList.remove('scrolled');
-});
-
-// Reveal de secciones al entrar en el viewport
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add('in-view');
-  });
-}, { threshold: 0.15 });
-
-document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => observer.observe(el));
+'use strict';
+// CIGUARD: edita los productos aquí. Los enlaces conservan los originales.
+const products = [
+  {id:'ozama',name:'Ozama Chess',status:'produccion',tag:'En producción',category:'Juego multijugador',description:'Plataforma de ajedrez multijugador en tiempo real para la comunidad dominicana.',url:'https://ozama-chess.onrender.com/',action:'Visitar producto',detail:'Ajedrez multijugador en tiempo real, concebido para conectar a la comunidad dominicana.'},
+  {id:'multilinks',name:'MultiLinks',status:'produccion',tag:'En producción',category:'Herramienta digital',description:'Tu perfil, todos tus enlaces, en un solo lugar.',url:'https://multilinksrd.vercel.app/',action:'Visitar producto',detail:'Una manera simple de organizar y compartir tus enlaces desde un único perfil.'},
+  {id:'teclazo',name:'Teclazo RD',status:'produccion',tag:'Descarga · Windows',category:'Videojuego',description:'Videojuego local de mecanografía, 100% offline: niveles, modos de juego, XP y leaderboard.',url:'downloads/TECLAZO_RD_Setup_v1.0.0.exe',action:'Descargar para Windows',download:true,detail:'Experiencia de mecanografía local para Windows, con progresión y distintos modos de juego. El instalador original está disponible para descargar.'},
+  {id:'nucleo',name:'Núcleo CRM',status:'desarrollo',tag:'En desarrollo',category:'Software empresarial',description:'CRM propio e independiente para gestionar leads y clientes, sin depender de plataformas externas.',url:'https://nucleo-crm-rho.vercel.app/',action:'Ver proyecto',detail:'Herramienta de gestión comercial actualmente en desarrollo.'},
+  {id:'ravia',name:'RAVIA14',status:'desarrollo',tag:'En desarrollo',category:'Videojuego 3D',description:'Juego 3D de carreras callejeras de mundo abierto, ambientado en RAVIA CITY, ciudad ficticia de identidad dominicana.',url:'https://ravia14.vercel.app/',action:'Ver proyecto',detail:'Proyecto de carreras y exploración 3D ambientado en una ciudad ficticia con identidad dominicana.'}
+];
+const $ = (selector)=>document.querySelector(selector);
+const menu=$('#menu-toggle'), links=$('#nav-links');
+menu?.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Cerrar menú':'Abrir menú');});
+links?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false');}));
+const grid=$('#product-grid'), search=$('#product-search'), empty=$('#product-empty');let filter='todos';
+function renderProducts(){if(!grid)return;const query=(search?.value||'').toLocaleLowerCase('es').trim();const matches=products.filter(p=>(filter==='todos'||p.status===filter)&&[p.name,p.category,p.description].join(' ').toLocaleLowerCase('es').includes(query));grid.replaceChildren();for(const p of matches){const el=document.createElement('article');el.className='product-card';el.dataset.id=p.id;const tag=document.createElement('span');tag.className='product-tag';tag.textContent=p.tag;const h=document.createElement('h3');h.textContent=p.name;const para=document.createElement('p');para.textContent=p.description;const actions=document.createElement('div');actions.className='product-actions';const a=document.createElement('a');a.textContent=p.action+' ↗';a.href=p.url;if(p.download){a.download='';}else{a.target='_blank';a.rel='noopener noreferrer';}const b=document.createElement('button');b.type='button';b.textContent='Más información';b.addEventListener('click',()=>openProduct(p));actions.append(a,b);el.append(tag,h,para,actions);grid.append(el);}empty.hidden=matches.length!==0;}
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;document.querySelectorAll('[data-filter]').forEach(c=>{const active=c===b;c.classList.toggle('active',active);c.setAttribute('aria-pressed',String(active));});renderProducts();}));search?.addEventListener('input',renderProducts);renderProducts();
+function openProduct(p){const d=$('#product-dialog'),c=$('#dialog-content');if(!d||!c)return;c.replaceChildren();const label=document.createElement('span');label.className='detail-label';label.textContent=p.category+' / '+p.tag;const h=document.createElement('h2');h.id='dialog-title';h.textContent=p.name;const desc=document.createElement('p');desc.textContent=p.detail;const a=document.createElement('a');a.className='button button-gold';a.href=p.url;a.textContent=p.action+' ↗';if(p.download)a.download='';else{a.target='_blank';a.rel='noopener noreferrer';}c.append(label,h,desc,a);d.showModal();}
+$('#dialog-close')?.addEventListener('click',()=>$('#product-dialog').close());$('#product-dialog')?.addEventListener('click',e=>{if(e.target.id==='product-dialog')e.target.close();});
+$('#year').textContent=new Date().getFullYear();
+// Configurar antes de habilitar recepción por correo. No se envía a servidores desde este frontend.
+const CONTACT_EMAIL='';
+$('#contact-form')?.addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget;if(!f.reportValidity())return;if(!CONTACT_EMAIL){$('#form-note').textContent='El canal de contacto todavía no está disponible. No se ha enviado ningún mensaje.';return;}const data=new FormData(f);const subject='CIGUARD · '+data.get('asunto');const body='Nombre: '+data.get('nombre')+'\nCorreo: '+data.get('correo')+'\n\n'+data.get('mensaje');location.href='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);$('#form-note').textContent='Se abrió (o se intentó abrir) tu aplicación de correo. Comprueba allí el envío; esta página no confirma la entrega.';});
