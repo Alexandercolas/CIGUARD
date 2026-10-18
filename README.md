@@ -16,8 +16,12 @@ Servir la raíz con un servidor HTTP, por ejemplo `python -m http.server 8000`, 
 
 ## Contacto
 
-`CONTACT_EMAIL` en `js/main.js` permanece vacío porque no se ha proporcionado una dirección receptora. El formulario informa que el canal está pendiente y no envía ni almacena mensajes. Una vez configurado, prepara un enlace `mailto:`; la entrega depende de la aplicación de correo del visitante. No hay backend ni recepción automática.
+El correo receptor es `ciguardinc@gmail.com`. El formulario prepara un enlace `mailto:` y el visitante completa el envío en su aplicación de correo. No hay backend, almacenamiento de mensajes ni confirmación de entrega desde la web.
 
 ## Situación legal
 
 La documentación original indica que el registro ante ONAPI y la constitución formal siguen pendientes. Los textos de privacidad y términos son informativos iniciales y requieren revisión antes de operar servicios comerciales.
+
+## Capturas del portafolio
+
+Las imágenes WebP de Ozama Chess, MultiLinks, Núcleo CRM y RAVIA14 son capturas de sus páginas públicas tomadas el 18 de octubre de 2026. La imagen de Núcleo muestra su acceso público, no datos de clientes. No se incluyen capturas de pantallas de error ni interfaces inventadas.
