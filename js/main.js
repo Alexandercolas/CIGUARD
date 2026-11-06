@@ -17,6 +17,38 @@ document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click'
 function openProduct(p){const d=$('#product-dialog'),c=$('#dialog-content');if(!d||!c)return;c.replaceChildren();const label=document.createElement('span');label.className='detail-label';label.textContent=p.category+' / '+p.tag;const h=document.createElement('h2');h.id='dialog-title';h.textContent=p.name;const desc=document.createElement('p');desc.textContent=p.detail;const a=document.createElement('a');a.className='button button-gold';a.href=p.url;a.textContent=p.action+' ↗';if(p.download)a.download='';else{a.target='_blank';a.rel='noopener noreferrer';}c.append(label,h);if(p.image){const image=document.createElement('img');image.className='dialog-preview';image.src=p.image;image.alt='Vista de la página pública de '+p.name;c.append(image);}c.append(desc,a);d.showModal();}
 $('#dialog-close')?.addEventListener('click',()=>$('#product-dialog').close());$('#product-dialog')?.addEventListener('click',e=>{if(e.target.id==='product-dialog')e.target.close();});
 $('#year').textContent=new Date().getFullYear();
-// El visitante completa el envío desde su aplicación de correo.
-const CONTACT_EMAIL='ciguardinc@gmail.com';
-$('#contact-form')?.addEventListener('submit',e=>{e.preventDefault();const f=e.currentTarget;if(!f.reportValidity())return;if(!CONTACT_EMAIL){$('#form-note').textContent='El canal de contacto todavía no está disponible. No se ha enviado ningún mensaje.';return;}const data=new FormData(f);const subject='CIGUARD · '+data.get('asunto');const body='Nombre: '+data.get('nombre')+'\nCorreo: '+data.get('correo')+'\n\n'+data.get('mensaje');location.href='mailto:'+CONTACT_EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);$('#form-note').textContent='Se abrió (o se intentó abrir) tu aplicación de correo. Comprueba allí el envío; esta página no confirma la entrega.';});
+const contactForm = $('#contact-form');
+let lastSubmission;
+contactForm?.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  if (!contactForm.reportValidity() || contactForm.dataset.sending) return;
+  const note = $('#form-note');
+  const button = contactForm.querySelector('button[type="submit"]');
+  const payload = Object.fromEntries(new FormData(contactForm));
+  const fingerprint = JSON.stringify(payload);
+  if (lastSubmission?.fingerprint !== fingerprint) lastSubmission = { fingerprint, eventId: crypto.randomUUID() };
+  contactForm.dataset.sending = 'true';
+  button.disabled = true;
+  button.textContent = 'Enviando…';
+  note.dataset.state = 'sending';
+  note.textContent = 'Estamos registrando tu solicitud.';
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ...payload, eventId: lastSubmission.eventId })
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || typeof result.reference !== 'string') throw new Error(result.error || 'No pudimos confirmar la entrega. Intenta de nuevo.');
+    if (JSON.stringify(Object.fromEntries(new FormData(contactForm))) === fingerprint) contactForm.reset();
+    lastSubmission = undefined;
+    note.dataset.state = 'success';
+    note.textContent = 'Recibimos tu solicitud. Referencia: ' + result.reference;
+  } catch (error) {
+    note.dataset.state = 'error';
+    note.textContent = error instanceof Error && error.message !== 'Failed to fetch' ? error.message : 'No pudimos confirmar la entrega. Intenta de nuevo.';
+  } finally {
+    delete contactForm.dataset.sending;
+    button.disabled = false;
+    button.textContent = 'Enviar solicitud ↗';
+  }
+});
